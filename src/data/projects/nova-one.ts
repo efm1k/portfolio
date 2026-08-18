@@ -28,9 +28,10 @@ export const novaOne: Project = {
   featuredOrder: null,
   presentation: "study",
   nda: false,
-  demoStatus: "ready",
+  demoStatus: "live",
   demoDir: "demos/nova-one",
   localUrl: "http://localhost:3010",
+  liveUrl: "https://nova-one-indol-three.vercel.app",
   coverImage: {
     src: "/projects/nova-one/cover.webp",
     alt: "Hero NOVA ONE: editorial product page с зарезервированным 3D-слоем",
@@ -101,7 +102,7 @@ export const novaOne: Project = {
     "Mobile as a directed experience, not a shrunk desktop",
   ],
   outcome:
-    "Local twelve-chapter product site: cinematic scroll, explode/assembly, custom shader, adaptive quality, mobile degradation, fallback and reduced motion. Procedural blocking model — not a finished sculpture. No live URL. No conversion claims.",
+    "Local twelve-chapter product site: cinematic scroll, explode/assembly, custom shader, adaptive quality, mobile degradation, fallback and reduced motion. Procedural blocking model — not a finished sculpture. Public interactive demo is live. No conversion claims.",
   screenshots: [
     {
       src: "/projects/nova-one/cover.webp",

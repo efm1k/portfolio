@@ -9,6 +9,10 @@ export function isDevelopmentEnv(): boolean {
   return process.env.NODE_ENV === "development";
 }
 
+export function liveDemoCtaLabel(slug: string): string {
+  return slug === "nova-one" ? "Открыть интерактивное демо" : "Открыть демо";
+}
+
 /**
  * Public liveUrl always wins. localUrl is development-only and must never
  * appear in production UI.

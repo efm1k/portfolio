@@ -28,9 +28,10 @@ export const aiSalesCopilot: Project = {
   featuredOrder: 2,
   presentation: "primary",
   nda: false,
-  demoStatus: "ready",
+  demoStatus: "live",
   demoDir: "demos/ai-sales-copilot",
   localUrl: "http://localhost:3003/demo",
+  liveUrl: "https://efm1k-ai-sales-copilot.vercel.app/demo",
   githubUrl: "https://github.com/efm1k/ai-sales-copilot",
   coverImage: {
     src: "/projects/ai-sales-copilot/cover.webp",

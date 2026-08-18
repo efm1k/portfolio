@@ -6,7 +6,7 @@ import {
   getStudyProjects,
   projects,
 } from "@/data/projects";
-import { resolveDemo, withoutLocalUrls } from "@/lib/demo";
+import { resolveDemo, withoutLocalUrls, liveDemoCtaLabel } from "@/lib/demo";
 import { DEMO_BADGE, NDA_BADGE } from "@/data/copy";
 
 describe("featured presentation order", () => {
@@ -60,10 +60,41 @@ describe("public case honesty", () => {
     expect(NDA_BADGE).toContain("NDA");
   });
 
-  it("hides missing live URLs", () => {
-    for (const project of projects) {
-      expect(project.liveUrl).toBeUndefined();
+  it("publishes live demo URLs only after actual deployments", () => {
+    const live: Record<string, string> = {
+      serviceflow: "https://efm1k-serviceflow.vercel.app/demo",
+      "ai-sales-copilot": "https://efm1k-ai-sales-copilot.vercel.app/demo",
+      autoflow: "https://efm1k-autoflow.vercel.app/demo",
+      "nova-one": "https://nova-one-indol-three.vercel.app",
+    };
+    const unpublishedLive = [
+      "legacy-upgrade",
+      "buildpro",
+      "gastrocity",
+      "aurelia",
+    ];
+
+    for (const [slug, url] of Object.entries(live)) {
+      const project = projects.find((item) => item.slug === slug);
+      expect(project?.liveUrl).toBe(url);
+      expect(project?.liveUrl?.startsWith("https://")).toBe(true);
+      expect(project?.liveUrl?.includes("localhost")).toBe(false);
+      expect(project?.liveUrl?.includes("example.com")).toBe(false);
+      expect(resolveDemo(project!).mode).toBe("live");
     }
+
+    for (const slug of unpublishedLive) {
+      const project = projects.find((item) => item.slug === slug);
+      expect(project?.liveUrl).toBeUndefined();
+      expect(resolveDemo(project!).mode).not.toBe("live");
+    }
+  });
+
+  it("uses the interactive demo label only for NOVA ONE", () => {
+    expect(liveDemoCtaLabel("nova-one")).toBe("Открыть интерактивное демо");
+    expect(liveDemoCtaLabel("serviceflow")).toBe("Открыть демо");
+    expect(liveDemoCtaLabel("ai-sales-copilot")).toBe("Открыть демо");
+    expect(liveDemoCtaLabel("autoflow")).toBe("Открыть демо");
   });
 
   it("publishes GitHub URLs only for Wave 2 public repos", () => {

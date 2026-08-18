@@ -11,7 +11,7 @@ import {
   STUDY_NOTICE,
 } from "@/data/copy";
 import { CaseSection } from "@/components/project/case-section";
-import { resolveDemo } from "@/lib/demo";
+import { liveDemoCtaLabel, resolveDemo } from "@/lib/demo";
 import type { Project } from "@/types/project";
 
 type CasePageProps = {
@@ -177,10 +177,15 @@ export function CasePage({ project }: CasePageProps) {
             <CaseSection id="demo" title="07 Live Demo">
               <div className="border border-border bg-elevated p-5">
                 <Badge tone="accent">Live demo</Badge>
-                <p className="mt-3 text-sm">Публичное развёрнутое приложение.</p>
+                <p className="mt-3 text-sm">
+                  Публичное развёрнутое приложение.
+                  {isStudy
+                    ? " Креативное исследование интерфейса."
+                    : " Данные синтетические."}
+                </p>
                 <div className="mt-4">
                   <ButtonLink href={demo.url} external>
-                    Открыть Live Demo
+                    {liveDemoCtaLabel(project.slug)}
                   </ButtonLink>
                 </div>
               </div>

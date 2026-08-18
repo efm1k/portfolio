@@ -1,11 +1,20 @@
 import { describe, expect, it } from "vitest";
-import { resolveDemo, withoutLocalUrls } from "./demo";
+import { liveDemoCtaLabel, resolveDemo, withoutLocalUrls } from "./demo";
 import type { Project } from "@/types/project";
 
 const sample = {
   localUrl: "http://localhost:3001/demo",
   localAdminUrl: "http://localhost:3001/admin",
 } as Project;
+
+describe("liveDemoCtaLabel", () => {
+  it("uses the interactive label only for NOVA ONE", () => {
+    expect(liveDemoCtaLabel("nova-one")).toBe("Открыть интерактивное демо");
+    expect(liveDemoCtaLabel("serviceflow")).toBe("Открыть демо");
+    expect(liveDemoCtaLabel("autoflow")).toBe("Открыть демо");
+    expect(liveDemoCtaLabel("ai-sales-copilot")).toBe("Открыть демо");
+  });
+});
 
 describe("resolveDemo", () => {
   it("does not expose localhost as live when liveUrl is absent", () => {

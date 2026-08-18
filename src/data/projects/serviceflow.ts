@@ -30,9 +30,10 @@ export const serviceflow: Project = {
   featuredOrder: 1,
   presentation: "primary",
   nda: false,
-  demoStatus: "ready",
+  demoStatus: "live",
   demoDir: "demos/serviceflow",
   localUrl: "http://localhost:3002/demo",
+  liveUrl: "https://efm1k-serviceflow.vercel.app/demo",
   githubUrl: "https://github.com/efm1k/serviceflow",
   coverImage: {
     src: "/projects/serviceflow/cover.webp",

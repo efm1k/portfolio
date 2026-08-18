@@ -28,9 +28,10 @@ export const autoflow: Project = {
   featuredOrder: 4,
   presentation: "primary",
   nda: false,
-  demoStatus: "ready",
+  demoStatus: "live",
   demoDir: "demos/autoflow",
   localUrl: "http://localhost:3001/demo",
+  liveUrl: "https://efm1k-autoflow.vercel.app/demo",
   githubUrl: "https://github.com/efm1k/autoflow",
   coverImage: {
     src: "/projects/autoflow/cover.webp",
