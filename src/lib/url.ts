@@ -9,12 +9,29 @@ export function absoluteUrl(path: string): string {
   return new URL(normalized, `${siteConfig.url}/`).toString();
 }
 
+function contactHandle(
+  value: string,
+  prefixes: RegExp,
+): string {
+  return value
+    .trim()
+    .replace(prefixes, "")
+    .replace(/^@/, "")
+    .replace(/\/+$/, "");
+}
+
 export function telegramUrl(username: string): string {
-  const handle = username.replace(/^@/, "");
+  const handle = contactHandle(
+    username,
+    /^(?:https?:\/\/)?(?:www\.)?(?:t\.me|telegram\.me)\//i,
+  );
   return `https://t.me/${handle}`;
 }
 
 export function githubUrl(username: string): string {
-  const handle = username.replace(/^@/, "");
+  const handle = contactHandle(
+    username,
+    /^(?:https?:\/\/)?(?:www\.)?github\.com\//i,
+  );
   return `https://github.com/${handle}`;
 }
