@@ -31,6 +31,7 @@ export const autoflow: Project = {
   demoStatus: "ready",
   demoDir: "demos/autoflow",
   localUrl: "http://localhost:3001/demo",
+  githubUrl: "https://github.com/efm1k/autoflow",
   coverImage: {
     src: "/projects/autoflow/cover.webp",
     alt: "Mini App клиента AutoFlow: запись, текущий заказ и автомобили",

@@ -71,6 +71,7 @@ For `npm run build` in CI, set `NEXT_PUBLIC_SITE_URL=https://example.com`.
 
 ## Limitations
 
-- No live demo URLs and no GitHub project URLs until those repositories are published
+- No live demo URLs until those sites are deployed
+- GitHub links appear only for published Wave 2 repositories
 - Contacts stay hidden until env values are set
 - This is a personal portfolio site, not a client product

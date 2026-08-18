@@ -60,10 +60,38 @@ describe("public case honesty", () => {
     expect(NDA_BADGE).toContain("NDA");
   });
 
-  it("hides missing live and github URLs", () => {
+  it("hides missing live URLs", () => {
     for (const project of projects) {
       expect(project.liveUrl).toBeUndefined();
-      expect(project.githubUrl).toBeUndefined();
+    }
+  });
+
+  it("publishes GitHub URLs only for Wave 2 public repos", () => {
+    const published: Record<string, string> = {
+      serviceflow: "https://github.com/efm1k/serviceflow",
+      "ai-sales-copilot": "https://github.com/efm1k/ai-sales-copilot",
+      "legacy-upgrade": "https://github.com/efm1k/legacy-upgrade",
+      autoflow: "https://github.com/efm1k/autoflow",
+    };
+    const unpublished = ["buildpro", "gastrocity", "nova-one", "aurelia"];
+
+    for (const [slug, url] of Object.entries(published)) {
+      const project = projects.find((item) => item.slug === slug);
+      expect(project?.githubUrl).toBe(url);
+    }
+
+    for (const slug of unpublished) {
+      const project = projects.find((item) => item.slug === slug);
+      expect(project?.githubUrl).toBeUndefined();
+    }
+
+    for (const project of projects) {
+      if (project.githubUrl) {
+        expect(project.githubUrl.startsWith("https://github.com/efm1k/")).toBe(
+          true,
+        );
+        expect(project.githubUrl.includes("localhost")).toBe(false);
+      }
     }
   });
 

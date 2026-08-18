@@ -31,6 +31,7 @@ export const aiSalesCopilot: Project = {
   demoStatus: "ready",
   demoDir: "demos/ai-sales-copilot",
   localUrl: "http://localhost:3003/demo",
+  githubUrl: "https://github.com/efm1k/ai-sales-copilot",
   coverImage: {
     src: "/projects/ai-sales-copilot/cover.webp",
     alt: "Карточка лида AI Sales Copilot: исходное обращение, анализ и human review",

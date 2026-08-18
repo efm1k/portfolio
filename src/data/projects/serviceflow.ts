@@ -33,6 +33,7 @@ export const serviceflow: Project = {
   demoStatus: "ready",
   demoDir: "demos/serviceflow",
   localUrl: "http://localhost:3002/demo",
+  githubUrl: "https://github.com/efm1k/serviceflow",
   coverImage: {
     src: "/projects/serviceflow/cover.webp",
     alt: "Дашборд ServiceFlow: очередь заявок, SLA и загрузка исполнителей",

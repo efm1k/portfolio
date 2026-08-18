@@ -33,6 +33,7 @@ export const legacyUpgrade: Project = {
   demoStatus: "ready",
   demoDir: "demos/legacy-upgrade",
   localUrl: "http://localhost:3013/case-study",
+  githubUrl: "https://github.com/efm1k/legacy-upgrade",
   localAdminUrl: "http://localhost:3013/admin/login.php",
   highlight: "309 → 3 SQL",
   coverImage: {
