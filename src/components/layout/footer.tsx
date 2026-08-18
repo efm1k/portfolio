@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { siteConfig } from "@/config/site";
 import { navItems } from "@/data/nav";
-import { githubUrl, telegramUrl } from "@/lib/url";
+import { emailAddress, githubUrl, mailtoHref, telegramUrl } from "@/lib/url";
 import { Container } from "@/components/ui/container";
 
 export function Footer() {
@@ -43,8 +43,8 @@ export function Footer() {
               <ul className="mt-3 space-y-2 text-sm">
                 {email ? (
                   <li>
-                    <a href={`mailto:${email}`} className="text-muted hover:text-accent">
-                      {email}
+                    <a href={mailtoHref(email)} className="text-muted hover:text-accent">
+                      {emailAddress(email)}
                     </a>
                   </li>
                 ) : null}

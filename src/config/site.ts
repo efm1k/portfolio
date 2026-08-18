@@ -23,9 +23,9 @@ export const siteConfig = {
    * Do not invent contact methods.
    */
   contacts: {
-    email: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "",
-    telegram: process.env.NEXT_PUBLIC_CONTACT_TELEGRAM ?? "",
-    github: process.env.NEXT_PUBLIC_CONTACT_GITHUB ?? "",
+    email: (process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "").trim(),
+    telegram: (process.env.NEXT_PUBLIC_CONTACT_TELEGRAM ?? "").trim(),
+    github: (process.env.NEXT_PUBLIC_CONTACT_GITHUB ?? "").trim(),
   },
 } as const;
 

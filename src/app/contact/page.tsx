@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
-import { ContactForm } from "@/components/contact/contact-form";
+import { ButtonLink } from "@/components/ui/button-link";
+import { buttonClassName } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { PageHeader } from "@/components/ui/page-header";
 import { siteConfig } from "@/config/site";
-import { githubUrl, telegramUrl } from "@/lib/url";
+import { emailAddress, githubUrl, mailtoHref, telegramHandle, telegramUrl } from "@/lib/url";
 
 export const metadata: Metadata = {
   title: "Контакты",
@@ -14,6 +15,8 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   const { email, telegram, github } = siteConfig.contacts;
   const hasLinks = Boolean(email || telegram || github);
+  const telegramHref = telegram ? telegramUrl(telegram) : "";
+  const githubHref = github ? githubUrl(github) : "";
 
   return (
     <main id="main">
@@ -23,53 +26,59 @@ export default function ContactPage() {
           title={hasLinks ? "Напишите по задаче" : "Публичные контакты пока не открыты"}
           description={
             hasLinks
-              ? "Кратко: что нужно сделать, какой контур уже есть, есть ли NDA. Форма не отправляет данные на сторонний сервер."
+              ? "Выберите удобный способ связи. Кратко: что нужно сделать, какой контур уже есть, есть ли NDA."
               : "Каналы связи появятся вместе с публичной публикацией. Пока можно смотреть проекты и описание опыта."
           }
         />
 
         {hasLinks ? (
-          <div className="mt-12 grid gap-12 lg:grid-cols-[minmax(0,1fr)_16rem]">
-            <ContactForm />
-            <aside>
-              <h2 className="font-mono text-xs tracking-wide text-muted uppercase">
-                Прямые ссылки
-              </h2>
-              <ul className="mt-4 space-y-3 text-sm">
-                {email ? (
-                  <li>
-                    <a href={`mailto:${email}`} className="text-accent hover:text-accent-strong">
-                      {email}
-                    </a>
-                  </li>
-                ) : null}
-                {telegram ? (
-                  <li>
-                    <a
-                      href={telegramUrl(telegram)}
-                      className="text-accent hover:text-accent-strong"
-                    >
-                      Telegram @{telegram.replace(/^@/, "")}
-                    </a>
-                  </li>
-                ) : null}
-                {github ? (
-                  <li>
-                    <a
-                      href={githubUrl(github)}
-                      className="text-accent hover:text-accent-strong"
-                    >
-                      GitHub
-                    </a>
-                  </li>
-                ) : null}
-              </ul>
-            </aside>
-          </div>
+          <ul className="mt-12 max-w-xl divide-y divide-border border border-border">
+            {email ? (
+              <li className="flex flex-col gap-4 bg-elevated px-5 py-5 sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                  <p className="font-mono text-xs tracking-wide text-muted uppercase">
+                    Email
+                  </p>
+                  <p className="mt-1 text-foreground">{emailAddress(email)}</p>
+                </div>
+                <a href={mailtoHref(email)} className={buttonClassName({ size: "sm" })}>
+                  Написать
+                </a>
+              </li>
+            ) : null}
+            {telegram ? (
+              <li className="flex flex-col gap-4 bg-elevated px-5 py-5 sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                  <p className="font-mono text-xs tracking-wide text-muted uppercase">
+                    Telegram
+                  </p>
+                  <p className="mt-1 text-foreground">
+                    @{telegramHandle(telegram)}
+                  </p>
+                </div>
+                <ButtonLink href={telegramHref} external size="sm">
+                  Открыть
+                </ButtonLink>
+              </li>
+            ) : null}
+            {github ? (
+              <li className="flex flex-col gap-4 bg-elevated px-5 py-5 sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                  <p className="font-mono text-xs tracking-wide text-muted uppercase">
+                    GitHub
+                  </p>
+                  <p className="mt-1 break-all text-foreground">{githubHref}</p>
+                </div>
+                <ButtonLink href={githubHref} external variant="secondary" size="sm">
+                  Открыть
+                </ButtonLink>
+              </li>
+            ) : null}
+          </ul>
         ) : (
           <p className="mt-10 max-w-xl text-sm text-muted">
-            Форма скрыта, пока нет публичного канала. Это намеренно: сайт не
-            выдумывает email и не показывает инструкции разработчика.
+            Публичные каналы появятся вместе с публикацией сайта. Пока можно
+            смотреть проекты и описание опыта.
           </p>
         )}
       </Container>

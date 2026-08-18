@@ -4,6 +4,7 @@ import { Footer } from "@/components/layout/footer";
 import { Header } from "@/components/layout/header";
 import { SkipLink } from "@/components/layout/skip-link";
 import { siteConfig } from "@/config/site";
+import { contactSameAs } from "@/lib/url";
 import "./globals.css";
 
 const inter = Inter({
@@ -80,14 +81,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       "n8n",
       "LLM integrations",
     ],
-    sameAs: [
-      siteConfig.contacts.github
-        ? `https://github.com/${siteConfig.contacts.github.replace(/^@/, "")}`
-        : undefined,
-      siteConfig.contacts.telegram
-        ? `https://t.me/${siteConfig.contacts.telegram.replace(/^@/, "")}`
-        : undefined,
-    ].filter((value): value is string => Boolean(value)),
+    sameAs: contactSameAs(siteConfig.contacts),
   };
 
   return (
