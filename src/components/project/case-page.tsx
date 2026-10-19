@@ -185,7 +185,7 @@ export function CasePage({ project }: CasePageProps) {
                 </p>
                 <div className="mt-4">
                   <ButtonLink href={demo.url} external>
-                    {liveDemoCtaLabel(project.slug)}
+                    {liveDemoCtaLabel()}
                   </ButtonLink>
                 </div>
               </div>

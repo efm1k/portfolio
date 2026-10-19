@@ -8,11 +8,8 @@ const sample = {
 } as Project;
 
 describe("liveDemoCtaLabel", () => {
-  it("uses the interactive label only for NOVA ONE", () => {
-    expect(liveDemoCtaLabel("nova-one")).toBe("Открыть интерактивное демо");
-    expect(liveDemoCtaLabel("serviceflow")).toBe("Открыть демо");
-    expect(liveDemoCtaLabel("autoflow")).toBe("Открыть демо");
-    expect(liveDemoCtaLabel("ai-sales-copilot")).toBe("Открыть демо");
+  it("uses the standard live demo label", () => {
+    expect(liveDemoCtaLabel()).toBe("Открыть демо");
   });
 });
 

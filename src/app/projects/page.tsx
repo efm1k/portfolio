@@ -90,7 +90,7 @@ export default async function ProjectsPage({ searchParams }: ProjectsPageProps) 
         <PageHeader
           eyebrow="Проекты"
           title="Публичные кейсы"
-          description="Фильтр по типу. Nova и Aurelia остаются experimental studies, даже если тип совпадает с коммерческим сайтом."
+          description="Фильтр по типу. Aurelia остаётся experimental study, даже если тип совпадает с коммерческим сайтом."
         />
         <div className="mt-10">
           <ProjectFilters active={active} />

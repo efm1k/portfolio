@@ -3,9 +3,9 @@ import { aiSalesCopilot } from "@/data/projects/ai-sales-copilot";
 import { aurelia } from "@/data/projects/aurelia";
 import { autoflow } from "@/data/projects/autoflow";
 import { buildpro } from "@/data/projects/buildpro";
+import { forma } from "@/data/projects/forma";
 import { gastrocity } from "@/data/projects/gastrocity";
 import { legacyUpgrade } from "@/data/projects/legacy-upgrade";
-import { novaOne } from "@/data/projects/nova-one";
 import { serviceflow } from "@/data/projects/serviceflow";
 import { withoutLocalUrls } from "@/lib/demo";
 
@@ -16,7 +16,7 @@ export const projects: readonly Project[] = [
   autoflow,
   buildpro,
   gastrocity,
-  novaOne,
+  forma,
   aurelia,
 ].map(withoutLocalUrls);
 

@@ -18,6 +18,7 @@ describe("featured presentation order", () => {
       "autoflow",
       "buildpro",
       "gastrocity",
+      "forma",
     ]);
   });
 
@@ -30,23 +31,24 @@ describe("featured presentation order", () => {
     ]);
   });
 
-  it("keeps BuildPro and GastroCity secondary", () => {
+  it("keeps BuildPro, GastroCity and FORMA secondary", () => {
     expect(getSecondaryProjects().map((project) => project.slug)).toEqual([
       "buildpro",
       "gastrocity",
+      "forma",
     ]);
   });
 
-  it("withholds Nova and Aurelia from the featured flow", () => {
+  it("withholds Aurelia from the featured flow and does not publish NOVA ONE", () => {
+    expect(getStudyProjects().map((project) => project.slug)).toEqual([
+      "aurelia",
+    ]);
     expect(
-      getStudyProjects()
-        .map((project) => project.slug)
-        .sort(),
-    ).toEqual(["aurelia", "nova-one"]);
+      getFeaturedProjects().some((project) => project.slug === "aurelia"),
+    ).toBe(false);
+    expect(projects.some((project) => project.slug === "nova-one")).toBe(false);
     expect(
-      getFeaturedProjects().some((project) =>
-        ["nova-one", "aurelia"].includes(project.slug),
-      ),
+      projects.some((project) => project.title.toLowerCase().includes("nova")),
     ).toBe(false);
   });
 });
@@ -65,7 +67,7 @@ describe("public case honesty", () => {
       serviceflow: "https://efm1k-serviceflow.vercel.app/demo",
       "ai-sales-copilot": "https://efm1k-ai-sales-copilot.vercel.app/demo",
       autoflow: "https://efm1k-autoflow.vercel.app/demo",
-      "nova-one": "https://nova-one-indol-three.vercel.app",
+      forma: "https://efm1k-forma.vercel.app",
     };
     const unpublishedLive = [
       "legacy-upgrade",
@@ -90,11 +92,26 @@ describe("public case honesty", () => {
     }
   });
 
-  it("uses the interactive demo label only for NOVA ONE", () => {
-    expect(liveDemoCtaLabel("nova-one")).toBe("Открыть интерактивное демо");
-    expect(liveDemoCtaLabel("serviceflow")).toBe("Открыть демо");
-    expect(liveDemoCtaLabel("ai-sales-copilot")).toBe("Открыть демо");
-    expect(liveDemoCtaLabel("autoflow")).toBe("Открыть демо");
+  it("uses the standard live demo label", () => {
+    expect(liveDemoCtaLabel()).toBe("Открыть демо");
+  });
+
+  it("publishes FORMA as a live demo without GitHub", () => {
+    const forma = projects.find((project) => project.slug === "forma");
+    expect(forma).toBeDefined();
+    expect(forma?.liveUrl).toBe("https://efm1k-forma.vercel.app");
+    expect(forma?.githubUrl).toBeUndefined();
+    expect(forma?.presentation).toBe("secondary");
+    expect(resolveDemo(forma!).mode).toBe("live");
+    expect(liveDemoCtaLabel()).toBe("Открыть демо");
+  });
+
+  it("does not expose a public NOVA ONE case, live URL or slug", () => {
+    expect(projects.map((project) => project.slug)).not.toContain("nova-one");
+    for (const project of projects) {
+      expect(project.liveUrl ?? "").not.toContain("nova-one");
+      expect(project.title).not.toMatch(/NOVA ONE/i);
+    }
   });
 
   it("publishes GitHub URLs only for Wave 2 public repos", () => {
@@ -104,7 +121,7 @@ describe("public case honesty", () => {
       "legacy-upgrade": "https://github.com/efm1k/legacy-upgrade",
       autoflow: "https://github.com/efm1k/autoflow",
     };
-    const unpublished = ["buildpro", "gastrocity", "nova-one", "aurelia"];
+    const unpublished = ["buildpro", "gastrocity", "forma", "aurelia"];
 
     for (const [slug, url] of Object.entries(published)) {
       const project = projects.find((item) => item.slug === slug);

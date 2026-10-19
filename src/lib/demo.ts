@@ -9,8 +9,8 @@ export function isDevelopmentEnv(): boolean {
   return process.env.NODE_ENV === "development";
 }
 
-export function liveDemoCtaLabel(slug: string): string {
-  return slug === "nova-one" ? "Открыть интерактивное демо" : "Открыть демо";
+export function liveDemoCtaLabel(): string {
+  return "Открыть демо";
 }
 
 /**

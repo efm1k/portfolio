@@ -38,7 +38,7 @@ export default function AboutPage() {
               </p>
               <p>
                 Специализация: операционные системы, автоматизация, модернизация
-                legacy PHP. Nova и Aurelia — дополнительная frontend-компетенция,
+                legacy PHP. Aurelia — дополнительная frontend-компетенция,
                 не ядро профиля.
               </p>
             </div>

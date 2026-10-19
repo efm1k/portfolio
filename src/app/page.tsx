@@ -88,15 +88,15 @@ export default function HomePage() {
         <Container className="py-16">
           <SectionHeading
             eyebrow="Selected technical cases"
-            title="Ещё два контура того же класса"
-            description="Коммерческий PHP-сайт и SEO-платформа. Ниже по приоритету, чем операционные системы выше."
+            title="Дополнительные публичные кейсы"
+            description="Ниже по приоритету, чем операционные системы выше. Состав секции берётся из project data."
           />
-          <div className="mt-8 border-t border-border">
+          <div className="mt-8 grid gap-6 lg:grid-cols-2">
             {secondary.map((project) => (
               <ProjectCard
                 key={project.slug}
                 project={project}
-                variant="index"
+                variant="medium"
               />
             ))}
           </div>
@@ -109,7 +109,7 @@ export default function HomePage() {
             <SectionHeading
               eyebrow="Experimental / creative studies"
               title="Дополнительная frontend-компетенция"
-              description="Не ядро профиля и не READY live. Nova и Aurelia — исследования интерфейса, пока без production-претензии."
+              description="Не ядро профиля и не READY live. Aurelia — исследование интерфейса, пока без production-претензии."
             />
             <div className="mt-8 border-t border-border">
               {studies.map((project) => (
