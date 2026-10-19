@@ -9,9 +9,10 @@ export const buildpro: Project = {
   type: "commercial-site",
   stack: [
     "PHP 8.4",
-    "Laravel",
+    "Laravel 13",
     "Blade",
     "PostgreSQL",
+    "nginx + PHP-FPM",
     "Tailwind CSS",
     "REST API",
   ],
@@ -28,10 +29,11 @@ export const buildpro: Project = {
   featuredOrder: 5,
   presentation: "secondary",
   nda: false,
-  demoStatus: "ready",
+  demoStatus: "live",
   demoDir: "demos/buildpro",
   localUrl: "http://localhost:3004",
   localAdminUrl: "http://localhost:3004/admin/demo",
+  liveUrl: "https://efm1k-buildpro.vercel.app",
   coverImage: {
     src: "/projects/buildpro/cover.webp",
     alt: "Секция проектов на публичном сайте BuildPro Engineering",
@@ -60,6 +62,7 @@ export const buildpro: Project = {
       "Очередь: DeliverLeadToCrmJob, retries, IntegrationEvent",
       "PostgreSQL: контент, заявки, audit, медиа",
       "Админка: dashboard, leads, CMS услуг и проектов",
+      "Публичный demo: nginx + PHP-FPM, Neon PostgreSQL, Mock CRM, общая demo-база",
     ],
   },
   implemented: [
@@ -78,7 +81,7 @@ export const buildpro: Project = {
   ],
   technologies: [
     {
-      name: "PHP 8.4 / Laravel / Blade",
+      name: "PHP 8.4 / Laravel 13 / Blade",
       purpose: "Серверный рендер сайта, формы, админка и очередь без отдельного React SPA",
     },
     {
@@ -91,13 +94,14 @@ export const buildpro: Project = {
     },
     {
       name: "nginx + PHP-FPM",
-      purpose: "Отдача сайта и разделение статики и PHP, порт demo 3004",
+      purpose: "Отдача сайта и разделение статики и PHP в контейнере demo",
     },
   ],
   technicalDecisions: [
     "Публичный frontend — Blade, не Next.js: PHP остаётся центром проекта.",
     "Заявка считается принятой после записи в БД. CRM — асинхронное следствие, не условие успеха.",
     "Demo-вход работает только при DEMO_MODE=true и логинит пользователя из базы, не через query-параметр.",
+    "Публичный demo: каталог /services, проекты /projects, вход /demo. Neon PostgreSQL, Mock CRM, общий seed/reset. Загрузки ephemeral.",
     "Sitemap собирается из опубликованного контента. Admin, login и черновики не попадают в индекс.",
     "Загрузки проверяют MIME и размер, имя файла генерируется, path traversal отсекается.",
   ],

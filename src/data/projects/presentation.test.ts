@@ -68,13 +68,9 @@ describe("public case honesty", () => {
       "ai-sales-copilot": "https://efm1k-ai-sales-copilot.vercel.app/demo",
       autoflow: "https://efm1k-autoflow.vercel.app/demo",
       forma: "https://efm1k-forma.vercel.app",
+      buildpro: "https://efm1k-buildpro.vercel.app",
     };
-    const unpublishedLive = [
-      "legacy-upgrade",
-      "buildpro",
-      "gastrocity",
-      "aurelia",
-    ];
+    const unpublishedLive = ["legacy-upgrade", "gastrocity", "aurelia"];
 
     for (const [slug, url] of Object.entries(live)) {
       const project = projects.find((item) => item.slug === slug);
@@ -103,6 +99,23 @@ describe("public case honesty", () => {
     expect(forma?.githubUrl).toBeUndefined();
     expect(forma?.presentation).toBe("secondary");
     expect(resolveDemo(forma!).mode).toBe("live");
+    expect(liveDemoCtaLabel()).toBe("Открыть демо");
+  });
+
+  it("publishes BuildPro as a live Laravel demo without GitHub", () => {
+    const buildpro = projects.find((project) => project.slug === "buildpro");
+    expect(buildpro).toBeDefined();
+    expect(buildpro?.liveUrl).toBe("https://efm1k-buildpro.vercel.app");
+    expect(buildpro?.githubUrl).toBeUndefined();
+    expect(buildpro?.presentation).toBe("secondary");
+    expect(buildpro?.stack).toContain("PHP 8.4");
+    expect(buildpro?.stack).toContain("Laravel 13");
+    expect(buildpro?.stack).toContain("PostgreSQL");
+    expect(buildpro?.stack).toContain("nginx + PHP-FPM");
+    expect(resolveDemo(buildpro!)).toEqual({
+      mode: "live",
+      url: "https://efm1k-buildpro.vercel.app",
+    });
     expect(liveDemoCtaLabel()).toBe("Открыть демо");
   });
 
